@@ -15,7 +15,7 @@ jobs:
               uses: actions/checkout@v4
             - name: Run the single commands
               run: |
-                echo "Hello world"
+                echo "Hello world 1"
                 echo "scope: ${{ env.env_scope }}"
                 echo "job: ${{ env.job }} "
                 echo "step: ${{ env.step }} "
