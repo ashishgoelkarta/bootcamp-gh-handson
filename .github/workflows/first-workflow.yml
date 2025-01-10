@@ -30,6 +30,7 @@ jobs:
                 echo "job: ${{ env.job }}"
                 echo "step: ${{ env.step }}"
                 echo "my sceret is : ${{ secrets.MY_SECRET }}"
+                env
 
     # runcommand-job2:
     #     runs-on: ubuntu-latest
