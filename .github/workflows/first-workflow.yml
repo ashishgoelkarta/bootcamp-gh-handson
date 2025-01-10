@@ -16,3 +16,17 @@ jobs:
               run: |
                 echo "Hello world 1"
                 echo "Hello world 2"
+
+    runcommandsagain:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the code
+              uses: actions/checkout@v4
+
+            - name: Run the commands
+              run: echo "Hello world"
+
+            - name: Run the multiple commands
+              run: |
+                echo "Hello world 1"
+                echo "Hello world 2"
