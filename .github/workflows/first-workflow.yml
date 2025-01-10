@@ -24,8 +24,8 @@ jobs:
               run: |
                 echo "This is multiple line command"
                 echo "scope: ${{ env.env_scope }}"
-                echo "scope: ${{ env.job }}"
-                echo "scope: ${{ env.step }}"
+                echo "job: ${{ env.job }}"
+                echo "step: ${{ env.step }}"
 
     # runcommand-job2:
     #     runs-on: ubuntu-latest
