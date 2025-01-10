@@ -2,29 +2,27 @@ name: first
 on:
     push
 env:
-    env_scope: "global variable"
+    env_scope: "global"
 jobs:
     runcommand-job1:
         runs-on: ubuntu-latest
         env:
-            env_scope: "job variable"
+            env_scope: "job"
         steps:
             - name: Checkout the code
               uses: actions/checkout@v4
-
-            - name: Run the mulltiple commands 1
+            - name: Run the single commands
               run: |
-                echo "Hello world 1"
+                echo "Hello world"
                 echo "scope: ${{ env.env_scope }}"
-                echo "scope: ${{ env.job }}"
-                echo "scope: ${{ env.step }}"
-
-
-            - name: Run the multiple commands 2
+                echo "job: ${{ env.job }} "
+                echo "step: ${{ env.step }} "
+            - name: Run the multiple commands
               env:
-                env_scope: "step variable"
+                step: "checkout"
+                env_scope: "step"
               run: |
-                echo "Hello world 2"
+                echo "This is multiple line command"
                 echo "scope: ${{ env.env_scope }}"
                 echo "scope: ${{ env.job }}"
                 echo "scope: ${{ env.step }}"
