@@ -3,24 +3,41 @@ on:
     push:
         branches:
             - main
-
 env:
-    env_scope: "global-var"
+    env_scope: "global"
 jobs:
-    runcommand-job1:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the code
+              uses: actions/checkout@v4
+
+            - name: Run with workflow variable
+              run: |
+                echo "Hello world"
+                echo "scope: ${{ env.env_scope }}"
+                
+  job2:
         runs-on: ubuntu-latest
         env:
+            job: "job2"
             env_scope: "job"
         steps:
             - name: Checkout the code
               uses: actions/checkout@v4
-            - name: Run the single commands
+
+            - name: Run with workflow variable
               run: |
-                echo "Hello world 1"
+                echo "Hello world"
                 echo "scope: ${{ env.env_scope }}"
-                echo "job: ${{ env.job }} "
-                echo "step: ${{ env.step }} "
-            - name: Run the multiple commands
+
+            - name: Run with workflow and job variable
+              run: |
+                echo "Hello world"
+                echo "scope: ${{ env.env_scope }}"
+                echo "job: ${{ env.job }}"
+
+            - name: Run with workflow job and step variable
               env:
                 step: "checkout"
                 env_scope: "step"
@@ -29,20 +46,27 @@ jobs:
                 echo "scope: ${{ env.env_scope }}"
                 echo "job: ${{ env.job }}"
                 echo "step: ${{ env.step }}"
-                echo "my sceret is : ${{ secrets.MY_SECRET }}"
                 env
 
-    # runcommand-job2:
-    #     runs-on: ubuntu-latest
-    #     needs: [runcommands]
-    #     steps:
-    #         - name: Checkout the code
-    #           uses: actions/checkout@v4
+                - name: Run with secret variable
+                env:
+                  step: "checkout"
+                  env_scope: "step"
+                run: |
+                  echo "This is multiple line command"
+                  echo "my sceret is : ${{ secrets.MY_SECRET }}"
+ 
+    job3:
+        runs-on: ubuntu-latest
+        needs: [job1 , job2]
+        steps:
+            - name: Checkout the code
+              uses: actions/checkout@v4
 
-    #         - name: Run the commands
-    #           run: echo "Hello world"
+            - name: Run the commands
+              run: echo "Hello world"
 
-    #         - name: Run the multiple commands
-    #           run: |
-    #             echo "Hello world 1"
-    #             echo "Hello world 2"
+            - name: Run the multiple commands
+              run: |
+                echo "Hello world 1"
+                echo "Hello world 2"
