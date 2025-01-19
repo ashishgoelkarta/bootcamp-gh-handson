@@ -26,18 +26,13 @@ jobs:
             - name: Checkout the code
               uses: actions/checkout@v4
 
-            - name: Run with workflow variable
-              run: |
-                echo "Hello world"
-                echo "scope: ${{ env.env_scope }}"
-
-            - name: Run with workflow and job variable
+            - name: Run with job variable
               run: |
                 echo "Hello world"
                 echo "scope: ${{ env.env_scope }}"
                 echo "job: ${{ env.job }}"
 
-            - name: Run with workflow job and step variable
+            - name: Run with job and step variable
               env:
                 step: "checkout"
                 env_scope: "step"
@@ -48,11 +43,11 @@ jobs:
                 echo "step: ${{ env.step }}"
                 env
 
-                - name: Run with secret variable
-                env:
+            - name: Run with secret variable
+              env:
                   step: "checkout"
                   env_scope: "step"
-                run: |
+              run: |
                   echo "This is multiple line command"
                   echo "my sceret is : ${{ secrets.MY_NEW_SECRET }}"
  
