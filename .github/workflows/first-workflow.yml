@@ -17,7 +17,7 @@ jobs:
                 echo "Hello world"
                 echo "scope: ${{ env.env_scope }}"
                 
-  job2:
+    job2:
         runs-on: ubuntu-latest
         env:
             job: "job2"
@@ -54,7 +54,7 @@ jobs:
                   env_scope: "step"
                 run: |
                   echo "This is multiple line command"
-                  echo "my sceret is : ${{ secrets.MY_SECRET }}"
+                  echo "my sceret is : ${{ secrets.MY_NEW_SECRET }}"
  
     job3:
         runs-on: ubuntu-latest
